@@ -41,8 +41,6 @@ jobs:
             otp-version: '22'
           - elixir-version: '1.11'
             otp-version: '23'
-          - elixir-version: '1.11'
-            otp-version: '24'
 
           - elixir-version: '1.12'
             otp-version: '22'
