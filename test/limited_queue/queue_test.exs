@@ -187,5 +187,17 @@ defmodule LimitedQueue.QueueTest do
       {queue, 0} = Queue.append(queue, values)
       assert Queue.to_list(queue) == values
     end
+
+    test "filter works" do
+      item1 = %{a: 1, b: 1}
+      item2 = %{a: 1, b: 2}
+      item3 = %{a: 2, b: 3}
+
+      queue = Queue.new(10) |> Queue.append([item1, item2, item3]) |> elem(0)
+
+      queue = Queue.filter(queue, fn item -> item.a != 1 end)
+      assert queue.size == 1
+      assert Queue.to_list(queue) == [item3]
+    end
   end
 end

@@ -159,6 +159,15 @@ defmodule LimitedQueue do
   end
 
   @doc """
+  Filters the queue, i.e. returns only those elements for which fun returns a truthy value.
+  """
+  @spec filter(t(value), (value -> boolean)) :: t(value) when value: any()
+  def filter(%__MODULE__{} = state, fun) do
+    queue = :queue.filter(fun, state.queue)
+    %__MODULE__{state | queue: queue, size: :queue.len(queue)}
+  end
+
+  @doc """
   The current number of values stored in the `LimitedQueue`.
   """
   @spec size(t(value)) :: non_neg_integer() when value: any()
