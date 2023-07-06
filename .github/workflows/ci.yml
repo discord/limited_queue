@@ -9,7 +9,7 @@ on:
 jobs:
   check_formatting:
     name: Ensure Code is Formatted
-    runs-on: ubuntu-20
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: erlef/setup-beam@v1.9.0
@@ -19,7 +19,7 @@ jobs:
       - run: mix format --check-formatted
   build:
     name: Build and test
-    runs-on: ubuntu-20
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         include:
