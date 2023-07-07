@@ -199,5 +199,17 @@ defmodule LimitedQueue.QueueTest do
       assert queue.size == 1
       assert Queue.to_list(queue) == [item3]
     end
+
+    test "reduce works" do
+      queue = Queue.new(10) |> Queue.append([1, 2, 3]) |> elem(0)
+      sum = Queue.reduce(queue, 0, fn a, b -> a + b end)
+      assert sum == 6
+    end
+
+    test "reduce args are passed in the right order" do
+      queue = Queue.new(10) |> Queue.append([2]) |> elem(0)
+      sum = Queue.reduce(queue, 10, fn a, b -> b / a end)
+      assert sum == 5
+    end
   end
 end

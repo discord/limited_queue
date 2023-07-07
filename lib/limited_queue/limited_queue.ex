@@ -168,6 +168,14 @@ defmodule LimitedQueue do
   end
 
   @doc """
+  Invokes `queue.fold` but using the call signatures of the standard Elixir reduce() function.
+  """
+  @spec reduce(t(value), any(), (value, any() -> any())) :: any() when value: any()
+  def reduce(%__MODULE__{} = state, initial_value, func) do
+    :queue.fold(func, initial_value, state.queue)
+  end
+
+  @doc """
   The current number of values stored in the `LimitedQueue`.
   """
   @spec size(t(value)) :: non_neg_integer() when value: any()
